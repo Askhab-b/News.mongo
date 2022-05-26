@@ -1,0 +1,26 @@
+const express = require("express");
+const mongoose = require("mongoose");
+
+const app = express();
+
+mongoose
+.connect(
+    "mongodb+srv://Askhab:askhab622@cluster0.gutn8.mongodb.net/?retryWrites=true&w=majority",
+    {
+useNewUrlParser: true,
+useUnifiedTopology: true,
+    }
+)
+.then(() => console.log("Успешно соединились с сервером MongoDB"))
+.catch(() => console.log("Ошибка при соединении с сервером MongoDB"));
+
+app.listen(3000, () => {
+console.log("Сервер запущен успешно");
+});
+
+
+
+app.use(express.json())
+app.use(require('./routes/news.route'))
+app.use(require('./routes/comments.route'))
+app.use(require('./routes/category.route'))
